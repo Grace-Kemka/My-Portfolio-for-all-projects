@@ -24,3 +24,16 @@ SOME OF MY MANUAL UI AND API TEST CASE DESIGN
 3. https://drive.google.com/file/d/1WjTTq_6MV65f0e1fhVFR3RQaLSieAH2E/view?usp=drive_link
 4. https://drive.google.com/file/d/1keXS1Wupyb3YQH5VJd3XmCLUVaQ1-Nss/view?usp=drive_link
 5. https://drive.google.com/file/d/1S3FYWOeI5-lv4EKryu3rCi2bnev4GIZ6/view?usp=drive_link
+
+TEST PLAN/STRATEGY CREATED
+https://tecvinson-global.atlassian.net/wiki/external/NjFjMDUzMzA5NjJlNDVjYjhiZWY4YzA5ZDIzZTdjYWU
+https://tecvinson-global.atlassian.net/wiki/external/MjllMzMzNWI3ODFiNGNlNGFiMDFkZDUxMWI5NzYzYjc
+https://tecvinson-global.atlassian.net/wiki/external/ZjI2OGJlYTk5ODk1NDE3ZGFlYjVlOWY3OGQzZGQ1ZTU
+https://tecvinson-global.atlassian.net/wiki/external/ZDRlYmM5OTA1MTVhNDIwYmEyNDBiOTM3YjE1ZTZkYzA
+
+TEST SUMMARY
+https://tecvinson-global.atlassian.net/wiki/external/OTQ5NGM2ZDhmM2RmNGQ2ZGE4ODAxMzZmOGM0MjUyYWU
+
+TEST EXECUTION ON JIRA
+https://tecvinson-global.atlassian.net/jira/software/c/projects/REA/boards/282/backlog?assignee=712020%3A266292af-d50c-41a4-9b0b-d5f518411e4e&atlOrigin=eyJpIjoiMWRhNTIxZWIzNDgyNDQwM2FmOWYzN2EyZTkzYWVkMjkiLCJwIjoiaiJ9
+
