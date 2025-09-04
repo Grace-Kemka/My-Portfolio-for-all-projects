@@ -1,0 +1,162 @@
+AUTOMATION USING CYPRESS TO TEST TECVINSON ACADEMY WEBSITE
+describe('Tecvinson Academy Courses Page Tests', () => {
+  // Use beforeEach to visit home page and navigate to Courses
+  beforeEach(() => {
+    cy.visit('https://tecvinsonacademy.com');
+    cy.contains('Courses').click();
+  });
+
+  // 1. Cosmetic check: Page loads without obvious errors
+  it('TCOS01: Page should load (no visible errors)', () => {
+    // Ensure the body is visible (cannot automatically check typos)
+    cy.get('body').should('be.visible');
+  });
+
+  // 2. Check for course category/sort option presence
+  it('TCOS02: Should display category/sort-by option', () => {
+    // Expect a category or sort-by label on the page
+    cy.contains(/Category|Sort by/i).should('exist');
+  });
+
+  // 3. Check for category filters (Subject, Skill Level, Format)
+  it('TCOS03: Should list filters for Subject, Skill Level, and Format', () => {
+    cy.contains(/Subject/i).should('be.visible');
+    cy.contains(/Skill Level/i).should('be.visible');
+    cy.contains(/Format/i).should('be.visible');
+  });
+
+  // 4. Check if category filters are clickable
+  it('TCOS04: Category filters should be clickable (navigate to filtered view)', () => {
+    ['Subject', 'Skill Level', 'Format'].forEach(label => {
+      cy.contains(label).click();
+      // After clicking, ensure we remain on the courses page
+      cy.url().should('include', '/courses');
+      cy.get('h1').should('be.visible');
+      cy.go('back');
+    });
+  });
+
+  // 5. Check info section (email, address, phone under logo)
+  it('TCOS05: Info section (email, address, phone) should be displayed', () => {
+    // Scroll to footer and verify contact info
+    cy.contains('Tecvinson Academy').scrollIntoView();
+    cy.contains('info@tecvinsonacademy.com').should('be.visible');
+    cy.contains(/Rudhögsgatan/i).should('be.visible');
+    cy.contains('+46').should('be.visible');
+  });
+
+  // 6. Check social media icons presence
+  it('TCOS06: Social media icons should be visible', () => {
+    cy.contains(/Follow Us/i).should('be.visible');
+    cy.get('a[href*="facebook.com"]').should('be.visible');
+    cy.get('a[href*="instagram.com"]').should('be.visible');
+    cy.get('a[href*="twitter.com"]').should('be.visible');
+    cy.get('a[href*="linkedin.com"]').should('be.visible');
+  });
+
+  // 7. Check social media links
+  it('TCOS07: Social media icons should link to the correct pages', () => {
+    cy.get('a[href*="facebook.com"]').should('have.attr', 'href').and('include', 'facebook.com');
+    cy.get('a[href*="instagram.com"]').should('have.attr', 'href').and('include', 'instagram.com');
+    cy.get('a[href*="twitter.com"]').should('have.attr', 'href').and('include', 'twitter.com');
+    cy.get('a[href*="linkedin.com"]').should('have.attr', 'href').and('include', 'linkedin.com');
+  });
+
+  // 8. Check scroll-up arrow functionality
+  it('TCOS08: Scroll-up arrow should scroll page to top', () => {
+    cy.scrollTo('bottom');
+    // Assume a scroll-to-top button with aria-label or known class
+    cy.get('button[aria-label="Scroll to top"], .scroll-top').click();
+    cy.window().its('scrollY').should('eq', 0);
+  });
+
+  // 9. Check that courses are displayed
+  it('TCOS09: All courses should be listed on the courses page', () => {
+    cy.get('.course-card, .course-item, .course').its('length').should('be.gte', 1);
+  });
+
+  // 10. Check individual course page navigation
+  it('TCOS10: Clicking a course should open its detail page', () => {
+    cy.get('.course-card, .course-item, .course').first().click();
+    cy.url().should('match', /\\/courses\\/[^/]+$/);
+    cy.get('h1').should('be.visible');
+  });
+
+  // 11. Check course content is displayed
+  it('TCOS11: Course detail page should display course content', () => {
+    // Navigate to first course if not already there
+    cy.get('.course-card, .course-item, .course').first().click();
+    cy.contains(/Course Content|Syllabus|Curriculum|Topics/).should('be.visible');
+  });
+
+  // 12. Check course duration
+  it('TCOS12: Course duration should be visible in the course details', () => {
+    cy.contains(/Duration:/i).should('be.visible');
+  });
+
+  // 13. Check course fee
+  it('TCOS13: Course fee should be visible in the course details', () => {
+    cy.contains(/Fee:|Cost:/i).should('be.visible');
+  });
+
+  // 14. Check prerequisites
+  it('TCOS14: Course prerequisites should be listed in the course details', () => {
+    cy.contains(/Prerequisite/i).should('be.visible');
+  });
+
+  // 15. Check instructor information
+  it('TCOS15: Instructor information should be visible on the course page', () => {
+    cy.contains(/Instructor/i).should('be.visible');
+  });
+
+  // 16. Check enrollment option (e.g., "Enroll Now" button)
+  it('TCOS16: Enrollment option (e.g., Enroll or Register Now) should be present', () => {
+    cy.contains(/Enroll|Register Now/i).should('be.visible');
+  });
+
+  // 17. Check enrollment options dropdown
+  it('TCOS17: Enrollment options dropdown should be present', () => {
+    cy.get('select.enrollment-options, .enroll-dropdown').should('exist');
+  });
+
+  // 18. Check clicking an enrollment option
+  it('TCOS18: Selecting an enrollment option should provide registration info or link', () => {
+    cy.get('select.enrollment-options').then($select => {
+      if ($select.length) {
+        cy.wrap($select).select(1);
+        cy.url().should('include', '/register');
+      }
+    });
+  });
+
+  // 19. Check search functionality (positive case)
+  it('TCOS19: Search should return matching courses', () => {
+    cy.get('input[type="search"], input[placeholder="Search"], input[name="search"]')
+      .type('Python{enter}');
+    cy.contains(/Python/i).should('be.visible');
+  });
+
+  // 20. Check search functionality (negative case)
+  it('TCOS20: Search with no matches should show a no-results message', () => {
+    cy.get('input[type="search"], input[placeholder="Search"], input[name="search"]')
+      .clear().type('NonexistentCourse{enter}');
+    cy.contains(/not available|no results/i).should('be.visible');
+  });
+
+  // 21. Check filter functionality
+  it('TCOS21: Filter icon should show options and filter courses', () => {
+    cy.get('button[aria-label="Filter"], .filter-icon').click();
+    cy.get('.filter-options, .filter-dropdown').should('be.visible');
+    // Example: apply first filter checkbox if available
+    cy.get('.filter-options input[type="checkbox"]').first().check();
+    cy.get('.course-card').its('length').should('be.lte', 5);
+  });
+
+  // 22. Check "Register Now" navigation
+  it('TCOS22: Register Now button should navigate to the registration page', () => {
+    cy.get('.course-card, .course-item, .course').first().click();
+    cy.contains(/Register Now|Register/i).click();
+    cy.url().should('match', /register|registration/);
+    cy.contains(/Registration|Register|Sign Up/i).should('be.visible');
+  });
+});
