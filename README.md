@@ -2,11 +2,9 @@
 
 ABOUT ME
 
-My name is Grace Kemka and over 2 years I have gather skills on QA in tech. I am one who pays astute attention to details and would never compromise on quality if it is within my power.
-Detail-oriented Software Quality Assurance Tester with combined experience in manual and automated 
-testing. Proficient in designing test plans, writing and executing test cases/scripts, and reporting defects 
-using Jira. Skilled in Cypress and API testing with Postman. Strong collaborator accustomed to Agile 
-workflows, committed to ensuring high-quality software releases through thorough regression testing. 
+My name is Grace Kemka, and over the past two years, I have developed strong skills in software quality assurance within the tech industry. I am detail-oriented, with a keen eye for accuracy, and I never compromise on quality when it is within my capacity to deliver.
+
+I am a Software Quality Assurance Tester with experience in both manual and automated testing. Proficient in designing test plans, writing and executing test cases/scripts, and reporting defects using Jira. Skilled in Cypress and API testing with Postman. I am a strong collaborator, well-versed in Agile workflows, and committed to ensuring high-quality software releases through thorough regression testing.
 
 TECHNICAL SKILLS 
  Manual Testing: Test planning, test case design, test execution, exploratory testing 
